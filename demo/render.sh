@@ -15,8 +15,10 @@ for r in api web infra; do mkdir -p "$FAKE/code/$r"; done
 mkdir -p "$FAKE/code/api/.claude/worktrees/fix-retries"
 printf 'current-context: arn:aws:eks:us-east-1:000000000000:cluster/staging\n' > "$FAKE/.kube/config"
 printf '[profile demo]\nsso_session = demo\nsso_account_id = 000000000000\nsso_role_name = ReadOnly\n' > "$FAKE/.aws/config"
-KEY=$(printf 'demo' | shasum | cut -d' ' -f1)
-printf '{"expiresAt":"%s"}\n' "$(date -u -r $((NOW + 3600)) +%Y-%m-%dT%H:%M:%SZ)" > "$FAKE/.aws/sso/cache/$KEY.json"
+KEY=$(printf 'demo' | { shasum 2>/dev/null || sha1sum; } | cut -d' ' -f1)
+EXP=$((NOW + 3600))
+EXP=$(date -u -r "$EXP" +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -d "@$EXP" +%Y-%m-%dT%H:%M:%SZ)   # BSD, then GNU date
+printf '{"expiresAt":"%s"}\n' "$EXP" > "$FAKE/.aws/sso/cache/$KEY.json"
 
 S="$FAKE/.cache/claude-statusline"
 C="$FAKE/code"

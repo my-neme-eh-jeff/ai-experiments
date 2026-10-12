@@ -42,7 +42,7 @@ Add to `~/.claude/settings.json`:
 }
 ```
 
-`CLAUDE_STATUSLINE_CODE_DIR` is the folder your repos live in, one level deep (`~/code/<repo>`). It defaults to `~/code`. Repos outside it aren't tracked.
+`CLAUDE_STATUSLINE_CODE_DIR` is the folder your repos live in, one level deep (`~/code/<repo>`). It defaults to `~/code`. Repos outside it aren't tracked. If the status line doesn't pick it up from `env`, export it in your shell profile instead.
 
 ## What it reads and writes
 

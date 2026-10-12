@@ -67,7 +67,7 @@ if [ -n "${AWS_PROFILE:-}" ] && [ "$AWSF" != /dev/null ]; then
   if [ -n "$SSO_SESSION" ] && [ -d "${TL_STATE_DIR:-}" ]; then
     KEYF="$TL_STATE_DIR/sso-key-$SSO_SESSION.txt"; KEY=""
     [ -f "$KEYF" ] && IFS= read -r KEY < "$KEYF"
-    if [ -z "$KEY" ]; then KEY=$(printf '%s' "$SSO_SESSION" | shasum 2>/dev/null | cut -d' ' -f1); [ -n "$KEY" ] && printf '%s\n' "$KEY" > "$KEYF" 2>/dev/null; fi
+    if [ -z "$KEY" ]; then KEY=$(printf '%s' "$SSO_SESSION" | { shasum 2>/dev/null || sha1sum 2>/dev/null; } | cut -d' ' -f1); [ -n "$KEY" ] && printf '%s\n' "$KEY" > "$KEYF" 2>/dev/null; fi
     [ -n "$KEY" ] && [ -f "$HOME/.aws/sso/cache/$KEY.json" ] && SSOF="$HOME/.aws/sso/cache/$KEY.json"
   fi
 fi
