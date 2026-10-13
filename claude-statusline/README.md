@@ -2,7 +2,7 @@
 
 *A Claude Code status line that stays quiet until something can stop you.*
 
-Everyone's in a terminal with a coding agent now, and the status line is the one line you read on every turn. I usually have five to eight Claude Code sessions open at once, so for me that line is under every one of them. I've spent a few weeks on mine, mostly inside those same sessions. This is what it shows, what it refuses to show, and the bugs that decided both.
+Everyone's in a terminal with a coding agent now, and the status line is the one line you read on every turn. On a busy day I have seven or eight Claude Code sessions open, so that line sits under every one of them. I've spent a few weeks on mine, mostly inside those same sessions. This is what it shows, what it refuses to show, and the bugs that decided both.
 
 ![The same session calm, heating up, and at the limit](demo/states.png)
 
