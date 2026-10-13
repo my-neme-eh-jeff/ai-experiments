@@ -5,6 +5,6 @@ These are experiments, so expect rough edges and no promise of maintenance.
 
 | Folder | What it is |
 | --- | --- |
-| [claude-statusline](claude-statusline/) | A Claude Code status line that stays quiet until something can stop you. |
+| [claude-statusline](claude-statusline/) | The Art of the Status Line: a Claude Code status line that stays quiet until something can stop you. |
 
 MIT licensed. See [LICENSE](LICENSE).
