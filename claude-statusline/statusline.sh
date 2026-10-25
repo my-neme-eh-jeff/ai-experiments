@@ -144,7 +144,8 @@ def kube_alias:
     | map(gsub("[\\n\\t]"; " ")) | join($us) ),
   ( $M[] | . as $m
     | ([ $O[] | select($m.top != "" and .top == $m.top) | .sid ] | unique) as $coll
-    | ([ $O[] | select($m.common != "" and .common == $m.common and .top != $m.top) ]) as $wt
+    | ([ $O[] | select($m.common != "" and .common == $m.common and .top != $m.top) ]
+         | sort_by(-.ep)) as $wt    # newest first: a worktree can switch branches
     | (if ($coll | length) > 0 then "collide" elif ($wt | length) > 0 then "worktree" else "" end) as $flag
     | (if $flag == "collide" then ($coll | length | tostring) elif $flag == "worktree" then ($wt[0].br // "") else "" end) as $detail
     | (if ($m.top != "" and $m.top != ($scan + "/" + $m.repo)) then "1" else "0" end) as $ownwt
